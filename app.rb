@@ -1,9 +1,7 @@
 require "bundler/setup"
-require "dotenv/load"
 
-require "omniauth-twitter"
-require "sinatra"
-require "twitter"
+environment = ENV.fetch("RACK_ENV", "development")
+Bundler.require(:default, environment)
 
 configure do
   enable :sessions
