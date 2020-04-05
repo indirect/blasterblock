@@ -33,9 +33,13 @@ helpers do
   end
 
   def block_ids(ids)
+    results = []
+
     ids.each_slice(100) do |slice|
-      twitter.block(slice)
+      results << twitter.block(slice).map(&:id)
     end
+
+    results.flatten
   end
 
 end
@@ -74,9 +78,21 @@ get "/" do
 end
 
 post "/user" do
-  params[:name]
+  username = params.fetch(:name)
+
+  ids = twitter.follower_ids(username, count: 5000)
+  count = block_ids(ids).size
+
+  flash[:notice] = "#{count} followers of @#{username} blocked"
+  redirect to("/")
 end
 
 post "/tweet" do
-  params[:id].to_i
+  tweet_id = params.fetch(:id)
+
+  ids = twitter.retweeters_ids(tweet_id, count: 5000)
+  count = block_ids(ids).size
+
+  flash[:notice] = "#{count} retweeters of tweet #{tweet_id} blocked (unfortunately the Twitter API only lets you see < 100 retweeters)"
+  redirect to("/")
 end
