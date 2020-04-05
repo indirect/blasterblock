@@ -27,6 +27,7 @@
       <form action="/tweet" method="post" class="mb-5">
         <div class="form-group">
           <label for="id">Tweet ID whose retweeters you want to block</label>
+          <small id="idHelp" class="form-text text-muted">Unfortunately the Twitter API refuses to give access to all retweeters, so this will only see up to 100 retweets maximum. 😢</small>
           <input class="form-control" name="id" id="id" aria-describedby="tweet id" placeholder="12345678901234567890">
         </div>
         <button type="submit" class="btn btn-primary">Block</button>

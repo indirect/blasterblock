@@ -93,6 +93,6 @@ post "/tweet" do
   ids = twitter.retweeters_ids(tweet_id, count: 5000)
   count = block_ids(ids).size
 
-  flash[:notice] = "#{count} retweeters of tweet #{tweet_id} blocked (unfortunately the Twitter API only lets you see < 100 retweeters)"
+  flash[:notice] = "#{count} retweeters of tweet #{tweet_id} blocked"
   redirect to("/")
 end
