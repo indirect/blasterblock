@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby Pathname.new(".ruby-version").expand_path.read
 
 gem "omniauth-twitter", "~> 1.4"
 gem "sinatra", "~> 2.0"
